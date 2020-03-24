@@ -69,9 +69,11 @@
     <Compile Include="Genericos\Endpoints.cs" />
     <Compile Include="Genericos\Exceptions\ErroRequisicaoAPIException.cs" />
     <Compile Include="Genericos\Exceptions\RequisicaoCancelarException.cs" />
+    <Compile Include="Genericos\Exceptions\RequisicaoConsultaEmissaoException.cs" />
     <Compile Include="Genericos\Exceptions\RequisicaoCorrecaoException.cs" />
     <Compile Include="Genericos\Exceptions\RequisicaoDownloadEventoException.cs" />
     <Compile Include="Genericos\Exceptions\RequisicaoDownloadException.cs" />
+    <Compile Include="Genericos\Exceptions\RequisicaoEmissaoException.cs" />
     <Compile Include="NSSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requisicoes\BPe\Eventos\AlterarPoltronaReqBPe.cs" />

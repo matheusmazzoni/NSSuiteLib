@@ -14,28 +14,27 @@ namespace NSSuiteCSharpLib.Requisicoes.NFCe
 
         public override string EnviarDownload()
         {
-            string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.NFCeDownload, "DOWNLOAD_NFCe");
+            return DownlaodEmissao(Projeto.NFCe, JsonConvert.SerializeObject(this), Endpoints.NFCeDownload);
         }
-
-        public override string EnviarDownloadESalvar(string caminho, bool exibirNaTela)
+        public override void EnviarDownloadESalvar(string caminho, bool exibirNaTela)
         {
-            return ValidarDownload(caminho, chNFe, exibirNaTela);
+            DownlaodEmissaoComTratamento(this, caminho, chNFe, exibirNaTela);
         }
-        
-        protected override string ValidarDownload(string caminho, string chave, bool exibirNaTela)
+        public override void TratamentoDownloadEmissao(string resposta, string caminho, string chave, bool exibirNaTela)
         {
-            string resposta = EnviarDownload();
-            var downloadResp = JsonConvert.DeserializeObject<DownloadRespNFCe>(resposta);
-
-            if (downloadResp.status.Equals("100"))
-                BaixarArquivos(downloadResp, CriarDiretorio(caminho), chave, exibirNaTela);
-            else
-                throw new RequisicaoDownloadException("Ocorreu um erro, veja o retorno da API para mais informações");
-
-            return resposta;
+            dynamic downloadResp = JsonConvert.DeserializeObject(resposta);
+            switch (downloadResp.status)
+            {
+                case "100":
+                    BaixarArquivos(downloadResp, CriarDiretorio(caminho), chave, exibirNaTela);
+                    break;
+                case "-2":
+                    throw new RequisicaoDownloadException(downloadResp.motivo + ", ele difere de X, P, XP ou PX");
+                default:
+                    throw new RequisicaoDownloadException(downloadResp.motivo);
+            }
         }
-        private void BaixarArquivos(DownloadRespNFCe downloadRespNFCe, string caminho, string nome, bool exibirNaTela)
+        private void BaixarArquivos(dynamic downloadRespNFCe, string caminho, string nome, bool exibirNaTela)
         {
             string xml = downloadRespNFCe.nfeProc.xml;
             Comuns.salvarXML(xml, caminho, nome);

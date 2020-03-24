@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Emissoes;
 
 namespace NSSuiteCSharpLib.Requisicoes.CTe.Emissao
@@ -10,12 +12,12 @@ namespace NSSuiteCSharpLib.Requisicoes.CTe.Emissao
 
         public override string EnviarDownload()
         {
-            throw new System.NotImplementedException();
+            return DownlaodEmissao(Projeto.CTe, JsonConvert.SerializeObject(this), Endpoints.CTeDownload);
         }
 
-        public override string EnviarDownloadESalvar(string caminho, bool exibirNaTela)
+        public override void EnviarDownloadESalvar(string caminho, bool exibirNaTela)
         {
-            throw new System.NotImplementedException();
+            DownlaodEmissaoComTratamento(this, caminho, chCTe, exibirNaTela);
         }
     }
 }

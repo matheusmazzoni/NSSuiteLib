@@ -12,12 +12,66 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Windows;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
 {
      public class Requisicao
     {
-        public enum Projeto { BPe, CTe, MDFe, NFCe, NFe}
+        public enum Projeto { BPe=63, CTe=57, CTeOS=67, MDFe=58, NFCe=65, NFe=55}
+        private int GerarDigitoVerificador(string chave)
+        {
+            int soma = 0; 
+            int restoDivisao = -1; 
+            int digitoVerificador = -1;  
+            int pesoMultiplicacao = 2; 
+
+            for (int i = chave.Length - 1; i != -1; i--)
+            {
+                int ch = Convert.ToInt32(chave[i].ToString());
+                soma += ch * pesoMultiplicacao;
+
+                if (pesoMultiplicacao < 9)
+                    pesoMultiplicacao += 1;
+                else
+                    pesoMultiplicacao = 2;
+            }
+            restoDivisao = soma % 11;        
+            if (restoDivisao == 0 || restoDivisao == 1)
+                digitoVerificador = 0;
+            else
+                digitoVerificador = 11 - restoDivisao;
+
+            return digitoVerificador;
+        }
+        protected string GerarChaveDocumento(int projeto, string versao, string cUF, string dhEmi,
+            string serie, string nDF, string tpEmis, string cDF, string cnpjEmitente,
+            string tpEvento = "", string nSeqEvento = "")
+        {
+            for (int i = serie.Length; i < 3; i++)
+                serie = "0" + serie;
+            for (int i = nDF.Length; i < 9; i++)
+                serie = "0" + serie;
+            string[] auxAAMM = dhEmi.Split('T') ;
+            DateTime dateTime = DateTime.Parse(auxAAMM[0]);
+            string aamm = dateTime.ToString("yyMM");
+            string chave43 = cUF + aamm + cnpjEmitente + projeto.ToString() + serie + nDF + tpEmis + cDF;
+            string chave = tpEvento + chave43 + GerarDigitoVerificador(chave43) + nSeqEvento;
+            return chave;
+        }
+        protected XmlDocument GerarXMLDocumento<T>(T ObjectXML)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlSerializer xmlSerializer = new XmlSerializer(ObjectXML.GetType());
+            using (MemoryStream xmlStream = new MemoryStream())
+            {
+                xmlSerializer.Serialize(xmlStream, ObjectXML);
+                xmlStream.Position = 0;
+                xmlDoc.Load(xmlStream);
+                return xmlDoc;
+            }
+        }
+
         protected string CriarDiretorio(string caminho)
         {
             try
@@ -159,7 +213,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
                 throw new Exception("Erro: Problema ao acessar o certificado digital" + caught.Message);
             }
         }
-        public virtual string ValidarAssinaturaXML(string xml, string cnpjEmitente, string nodo)
+        public virtual string AssinarXMLDocumento(string xml, string cnpjEmitente, string nodo)
         {
             X509Certificate2 cert = BuscaCertificado(cnpjEmitente.Trim());
             if (cert.Equals(null))
@@ -171,18 +225,6 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
             return AssinaXML(xml.Trim(), nodo, cert);
         }
 
-        protected virtual string RequisitarNaAPI(string conteudo, string url, string nomeEvento, string tpAmb)
-        {
-            Comuns.gravarLinhaLog("[" + nomeEvento.ToUpper() +"_DADOS]");
-            Comuns.gravarLinhaLog(conteudo);
-
-            string resposta = EnviaConteudoParaAPI(conteudo, url, "json");
-
-            Comuns.gravarLinhaLog("[" + nomeEvento.ToUpper() + "_RESPOSTA]");
-            Comuns.gravarLinhaLog(resposta);
-
-            return resposta;
-        }
         private string EnviaConteudoParaAPI(string conteudo, string url, string tpConteudo)
         {
             string retorno = "";
@@ -255,6 +297,18 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
                 }
             }
             return retorno;
+        }
+        protected virtual string RequisitarNaAPI(string conteudo, string url, string nomeEvento, string tpConteudo = "json")
+        {
+            Comuns.gravarLinhaLog("[" + nomeEvento.ToUpper() +"_DADOS]");
+            Comuns.gravarLinhaLog(conteudo);
+
+            string resposta = EnviaConteudoParaAPI(conteudo, url, tpConteudo);
+
+            Comuns.gravarLinhaLog("[" + nomeEvento.ToUpper() + "_RESPOSTA]");
+            Comuns.gravarLinhaLog(resposta);
+
+            return resposta;
         }
     }
 }

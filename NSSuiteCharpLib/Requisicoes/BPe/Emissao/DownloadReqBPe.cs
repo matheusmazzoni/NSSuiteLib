@@ -11,13 +11,11 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe
 
         public override string EnviarDownload()
         {
-            string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.BPeDownload, "DOWNLOAD_BPe"); 
+            return DownlaodEmissao(Projeto.BPe, JsonConvert.SerializeObject(this), Endpoints.BPeDownload);
         }
-
-        public override string EnviarDownloadESalvar(string caminho, bool exibirNaTela)
+        public override void EnviarDownloadESalvar(string caminho, bool exibirNaTela)
         {
-            return ValidarDownload(caminho, chBPe, exibirNaTela);
+            DownlaodEmissaoComTratamento(this, caminho, chBPe, exibirNaTela);
         }
     }
 }

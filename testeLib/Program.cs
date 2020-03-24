@@ -16,10 +16,9 @@ namespace testeLib
     {
         static void Main(string[] args)
         {
-            NSSuite ns = new NSSuite("");
+            NSSuite ns = new NSSuite("4EB15D6DEDAEBAE3FD0B7B5E5B0AD6D4");
             TemplateBPe templateBPe = new TemplateBPe();
-            EnvioReqBPe bpe = templateBPe.GetBPe();
-            ns.EmitirDocumentoSincrono(bpe, @"C:\", bpe.BPe.infBPe.emit.CNPJ);
+            ns.EmitirDocumentoSincrono(templateBPe.BPeRoot, "XP", @"C:\", false, true);
         }
     }
 }

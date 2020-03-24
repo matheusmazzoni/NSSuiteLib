@@ -12,7 +12,6 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Eventos
         public string nProt { get; set; }
         public string xJust { get; set; }
 
-       public abstract string AssinarXMLCancelamento(string conteudo, string cnpjEmitente);
        public abstract string EnviarCancelamento(string cnpjEmitente, bool a3);
        public abstract string EnviarCancelamentoESalvar(DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela, bool a3);
        public abstract string GerarXMLCancelamento(string conteudo, string tpConteudo);

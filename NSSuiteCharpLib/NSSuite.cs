@@ -17,10 +17,10 @@ namespace NSSuiteCSharpLib
             TempoEspera = 500;
         }
 
-        public string EmitirDocumentoSincrono(IEnvioReq emissaoReq, string tpDown, string caminho,
+        public void EmitirDocumentoSincrono(IEnvioReq emissaoReq, string tpDown, string caminho,
             bool exibirNaTela = false, bool a3 = false)
         {
-            return emissaoReq.EnviarEmissaoESalvar(tpDown, caminho, exibirNaTela, a3);
+            emissaoReq.EnviarEmissaoSincrona(tpDown, caminho, exibirNaTela, a3);
         }
 
         public string CancelarDocumentoESalvar(CancelarReq cancelarReq, DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela = false, bool a3 = false)

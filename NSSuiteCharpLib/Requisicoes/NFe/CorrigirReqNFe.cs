@@ -30,7 +30,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos
             try
             {
                 string respostaJSON = GerarXMLCorrecao(conteudo, "json");
-                return ValidarAssinaturaXML(respostaJSON, cnpjEmitente, "infEvento");
+                return null;
 
             }
             catch (Exception)

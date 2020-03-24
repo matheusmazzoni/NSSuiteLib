@@ -13,7 +13,7 @@ namespace NSSuiteCSharpLib.Requisicoes.NFe.Emissoes
             throw new System.NotImplementedException();
         }
 
-        public override string EnviarDownloadESalvar(string caminho, bool exibirNaTela)
+        public override void EnviarDownloadESalvar(string caminho, bool exibirNaTela)
         {
             throw new System.NotImplementedException();
         }
