@@ -23,7 +23,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Eventos
             var downloadResp = JsonConvert.DeserializeObject<DownloadResp>(resposta);
 
             if (downloadResp.status.Equals("200"))
-                BaixarArquivos(downloadResp, CriarDiretorio(caminho), nome, exibirNaTela);
+                BaixarArquivos(downloadResp, Comuns.CriarDiretorio(caminho), nome, exibirNaTela);
             else
                 throw new RequisicaoDownloadEventoException("Ocorreu um erro, veja o retorno da API para mais informações");
 

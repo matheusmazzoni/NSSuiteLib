@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 using NSSuiteCSharpLib.Respostas.NFe;
 using System;
 
@@ -17,7 +18,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos
             string conteudo = JsonConvert.SerializeObject(this);
             if (a3)
                 AssinarXMLCorrecao(conteudo, cnpjEmitente);
-            return RequisitarNaAPI(conteudo, Endpoints.NFeCCe, "CCE_NFe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.NFeCCe, "CCE_NFe");
         }
 
         public override string EnviarCorrecaoESalvar(DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela, bool a3)
@@ -42,7 +43,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos
 
         public override string GerarXMLCorrecao(string conteudo, string tpConteudo)
         {
-            return RequisitarNaAPI(conteudo, Endpoints.NFeGerarXMLCorrecao, "GERACAO_XML_CORRECAO_NFe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.NFeGerarXMLCorrecao, "GERACAO_XML_CORRECAO_NFe");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
 {
-    public class Utilitario : Requisicao
+    public class Utilitario 
     {
     }
 }

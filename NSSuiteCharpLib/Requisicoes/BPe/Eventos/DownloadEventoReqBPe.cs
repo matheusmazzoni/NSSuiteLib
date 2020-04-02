@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 
 namespace NSSuiteCSharpLib.Requisicoes.BPe.Eventos
 {
@@ -12,7 +13,7 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe.Eventos
         public override string EnviarDownloadEvento()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.BPeDownloadEvento, "DOWNLOAD_EVENTO_BPe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.BPeDownloadEvento, "DOWNLOAD_EVENTO_BPe");
         }
 
         public override void EnviarDownloadEventoESalvar(string caminho, string tpEvento, bool exibirNaTela)

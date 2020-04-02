@@ -2,7 +2,7 @@
 
 namespace NSSuiteCSharpLib.Respostas._Genéricas
 {
-    public abstract class ConsStatusProcessamentoResp
+    public class ConsStatusProcessamentoResp
     {
         public string status { get; set; }
         public string motivo { get; set; }

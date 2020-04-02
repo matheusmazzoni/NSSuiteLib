@@ -4,6 +4,7 @@ using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Genericos.Exceptions;
 using NSSuiteCSharpLib.Requisicoes._Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 using NSSuiteCSharpLib.Respostas.NFCe;
 using System;
 using System.Diagnostics;
@@ -19,7 +20,7 @@ namespace NSSuiteCSharpLib.Requisicoes.NFCe
         public override string EnviarDownloadEvento()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.NFCeDownload, "DOWNLOAD_EVENTO_NFCe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.NFCeDownload, "DOWNLOAD_EVENTO_NFCe");
         }
         public override void EnviarDownloadEventoESalvar(string caminho, string tpEvento, bool exibirNaTela)
         {
@@ -31,7 +32,7 @@ namespace NSSuiteCSharpLib.Requisicoes.NFCe
             var downloadResp = JsonConvert.DeserializeObject<DownloadRespNFCe>(resposta);
 
             if (downloadResp.status.Equals("100"))
-                BaixarArquivos(downloadResp, CriarDiretorio(caminho), chave, exibirNaTela);
+                BaixarArquivos(downloadResp, Comuns.CriarDiretorio(caminho), chave, exibirNaTela);
             else
                 throw new RequisicaoDownloadEventoException("Ocorreu um erro, veja o retorno da API para mais informações");
 

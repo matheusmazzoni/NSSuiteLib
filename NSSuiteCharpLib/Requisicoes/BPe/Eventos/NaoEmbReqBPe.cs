@@ -19,7 +19,7 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe
         public string EnviarNaoEmb()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.BPeNaoEmb, "NAO_EMB_BPe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.BPeNaoEmb, "NAO_EMB_BPe");
         }
         public string EnviarNaoEmbESalvar(string cnpjEmitente, string caminho)
         {

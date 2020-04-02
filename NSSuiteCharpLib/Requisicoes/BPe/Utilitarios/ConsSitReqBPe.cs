@@ -1,6 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 using NSSuiteCSharpLib.Genericos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Utilitarios;
 
 namespace NSSuiteCSharpLib.Requisicoes.BPe
@@ -12,7 +13,7 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe
         public override string EnviarConsultaSituacao()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.BPeConsSit, "CONSULTA_SITUACAO_BPe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.BPeConsSit, "CONSULTA_SITUACAO_BPe");
         }
     }
 }

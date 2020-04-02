@@ -17,7 +17,7 @@ namespace NSSuiteCharpLib.Requisicoes.BPe.Eventos
         private string EnviarAlterarPoltrona()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.BPeCancelamento, "ALTERACAO_POLTRONA_BPe");
+            return null;// RequisitarNaAPI(conteudo, Endpoints.BPeCancelamento, "ALTERACAO_POLTRONA_BPe");
         }
         public string EnvairAllterarPoltronaESalvar(string caminho)
         {

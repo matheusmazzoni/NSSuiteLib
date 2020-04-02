@@ -1,26 +1,32 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using NSSuiteCSharpLib.Requisicoes._Genericos;
+﻿using NSSuiteCSharpLib.Genericos;
+using NSSuiteCSharpLib.Genericos.Exceptions;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Emissoes;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using System.Windows;
 
 namespace NSSuiteCSharpLib
 {
     public class NSSuite
     {
         public static string Token { get; private set; }
-        public static int TempoEspera { get; private set; }
+        public static int TempoEspera { get; private set; } 
         public NSSuite(string token)
         {
             Token = token;
             TempoEspera = 500;
         }
 
-        public void EmitirDocumentoSincrono(IEnvioReq emissaoReq, string tpDown, string caminho,
+        public void EmitirDocumentoSincrono(IEnvio emissaoReq, string tpDown, string caminho,
             bool exibirNaTela = false, bool a3 = false)
         {
-            emissaoReq.EnviarEmissaoSincrona(tpDown, caminho, exibirNaTela, a3);
+            try
+            {
+                emissaoReq.RequisitarEmissaoSicrona(tpDown, caminho, exibirNaTela, a3);
+            }
+            catch(ErroRequisicaoAPIException ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao requisitar para API", MessageBoxButton.OK, MessageBoxImage.Error);
+            }         
         }
 
         public string CancelarDocumentoESalvar(CancelarReq cancelarReq, DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela = false, bool a3 = false)

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 using System.Collections.Generic;
 
 namespace NSSuiteCSharpLib.Requisicoes.CTe
@@ -25,7 +26,7 @@ namespace NSSuiteCSharpLib.Requisicoes.CTe
             string conteudo = JsonConvert.SerializeObject(this);
             if (a3)
                 AssinarXMLCorrecao(conteudo, cnpjEmitente);
-            return RequisitarNaAPI(conteudo, Endpoints.CTeCCe, "CCE_CTe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.CTeCCe, "CCE_CTe");
         }
 
         public override string EnviarCorrecaoESalvar(DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela, bool a3)

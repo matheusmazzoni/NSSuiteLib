@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Eventos;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 
 namespace NSSuiteCSharpLib.Requisicoes.MDFe
 {
@@ -13,7 +14,7 @@ namespace NSSuiteCSharpLib.Requisicoes.MDFe
         public override string EnviarDownloadEvento()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return RequisitarNaAPI(conteudo, Endpoints.MDFeDownloadEvento, "DOWNLOAD_EVENTO_MDFe");
+            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.MDFeDownloadEvento, "DOWNLOAD_EVENTO_MDFe");
         }
 
         public override void EnviarDownloadEventoESalvar(string caminho, string tpEvento, bool exibirNaTela)
