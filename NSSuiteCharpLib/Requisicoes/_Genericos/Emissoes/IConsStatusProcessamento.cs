@@ -4,10 +4,10 @@
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Emissoes
 {
     public interface IConsStatusProcessamento
-    {
-        string CNPJ { get; set; }
-        string nsNRec { get; set; }
-        int tpAmb { get; set; }
+    {  
+        string CNPJEmitente { get; set; }
+        string NumeroRequisicaoNS { get; set; }
+        int TipoDeAmbiente { get; set; }
 
         ConsStatusProcessamentoResp ConsultaStatusProcesamentoDFe();
         ConsStatusProcessamentoResp EnviarConsultaStatusProcesamento();

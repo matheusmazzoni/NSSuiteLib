@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NSSuiteCSharpLib.Respostas._Genéricas
 {
-    public class CancelarResp : Evento
+    public class CancelarResp : EventoReq
     {
         public string status { get; set; }
         public string motivo { get; set; }

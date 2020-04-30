@@ -2,18 +2,17 @@
 using NSSuiteCSharpLib.Genericos;
 using NSSuiteCSharpLib.Genericos.Exceptions;
 using NSSuiteCSharpLib.Requisicoes._Genericos.Emissoes;
+using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 using NSSuiteCSharpLib.Respostas.NFCe;
 using System.Diagnostics;
-using static NSSuiteCSharpLib.Requisicoes._Genericos.Padroes.Requisicao;
 
 namespace NSSuiteCSharpLib.Requisicoes.NFCe
 {
-    public class DownloadReqNFCe : IDownload
+    public class DownloadReqNFCe : Requisicao, IDownload
     {
         public string tpDown { get; set; }
         public int tpAmb { get; set; }
         public string chNFe { get; set; }
-        //Unico de NFCe
         public Impressao impressao { get; set; }
 
         public string EnviarDownload(string caminho, bool exibirNaTela)
@@ -28,16 +27,18 @@ namespace NSSuiteCSharpLib.Requisicoes.NFCe
             switch (downloadRespNFCe.status)
             {
                 case "200":
-                    string nomeArq = $"{chNFe}-{Projeto.NFCe}Proc";
-                    string xml = downloadRespNFCe.nfeProc.xml;
-                    Comuns.salvarXML(xml, caminho, nomeArq);
+                    {
+                        string nomeArq = $"{chNFe}-proc{Projeto.NFCe}";
+                        string xml = downloadRespNFCe.nfeProc.xml;
+                        Comuns.salvarXML(xml, caminho, nomeArq);
 
-                    string pdf = downloadRespNFCe.pdf;
-                    Comuns.salvarPDF(pdf, caminho, nomeArq);
+                        string pdf = downloadRespNFCe.pdf;
+                        Comuns.salvarPDF(pdf, caminho, nomeArq);
 
-                    if (exibirNaTela)
-                        Process.Start($"{caminho + nomeArq}.pdf");
-                    break;
+                        if (exibirNaTela)
+                            Process.Start($"{caminho + nomeArq}.pdf");
+                        break;
+                    }
                 case "-2":
                     throw new RequisicaoDownloadException($"{downloadRespNFCe.motivo}, ele difere de X, P, XP ou PX");
                 default:

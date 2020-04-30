@@ -3,13 +3,13 @@ using NSSuiteCSharpLib.Genericos.Exceptions;
 using System;
 using System.IO;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
 {
      public class Requisicao
      {
-        public enum Projeto { BPe=63, CTe=57, CTeOS=67, MDFe=58, NFCe=65, NFe=55}
-        private static string EnviaConteudoParaAPI(string conteudo, string url, string tpConteudo)
+        public enum Projeto { BPe=63, CTe=57, CTeOS=67, MDFe=58, NFCe=65, NFe=55};
+        public enum Conteudo { txt, json, xml};
+        private string EnviaConteudoParaAPI(string conteudo, string url, string tpConteudo)
         {
             string retorno = string.Empty;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -60,7 +60,7 @@ namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
             }
             return retorno;
         }
-        public static string RequisitarNaAPI(string conteudo, string url, string nomeEvento, string tpConteudo = "json")
+        public string RequisitarNaAPI(string conteudo, string url, string nomeEvento, string tpConteudo = "json")
         {
             Comuns.gravarLinhaLog("[" + nomeEvento.ToUpper() +"_DADOS]");
             Comuns.gravarLinhaLog(conteudo);

@@ -6,7 +6,7 @@ using NSSuiteCSharpLib.Requisicoes._Genericos.Padroes;
 
 namespace NSSuiteCharpLib.Requisicoes.BPe.Eventos
 {
-    public class AlterarPoltronaReqBPe : Evento
+    public class AlterarPoltronaReqBPe : EventoReq
     {
         public string chBPe { get; set; }
         public string nProt { get; set; }

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using NSSuiteCSharpLib.Respostas._Genéricas.Emissoes;
+using System.Collections.Generic;
 
 namespace NSSuiteCSharpLib.Respostas._Genéricas
 {
-    public class EmitirResp
+    public class EmitirResp : IEmitirResp
     {
         public string status { get; set; }
         public string motivo { get; set; }
@@ -10,6 +11,5 @@ namespace NSSuiteCSharpLib.Respostas._Genéricas
         public List<string> erros { get; set; }
         public Erro erro { get; set; }
         public string nsNRec { get; set; }
-
     }
 }

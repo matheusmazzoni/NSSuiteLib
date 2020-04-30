@@ -8,7 +8,7 @@ using NSSuiteCSharpLib.Respostas.BPe.Eventos;
 
 namespace NSSuiteCSharpLib.Requisicoes.BPe
 {
-    public class NaoEmbReqBPe : Evento
+    public class NaoEmbReqBPe : EventoReq
     {
         public string tpAmb { get; set; }
         public string dhEvento { get; set; }

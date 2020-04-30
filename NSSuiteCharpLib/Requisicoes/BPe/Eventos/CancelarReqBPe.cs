@@ -14,7 +14,7 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe.Eventos
         public override string EnviarCancelamento(string cnpjEmitente, bool a3)
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.BPeCancelamento, "CANCELAMENTO_BPe");
+            return RequisitarNaAPI(conteudo, Endpoints.BPeCancelamento, "CANCELAMENTO_BPe");
         }
         public override string EnviarCancelamentoESalvar(DownloadEventoReq downloadEventoReq, string caminho, string cnpjEmitente, bool exibirNaTela, bool a3)
         {

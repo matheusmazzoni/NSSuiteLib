@@ -20,7 +20,7 @@ namespace NSSuiteCSharpLib.Requisicoes.NFCe
         public override string EnviarDownloadEvento()
         {
             string conteudo = JsonConvert.SerializeObject(this);
-            return Requisicao.RequisitarNaAPI(conteudo, Endpoints.NFCeDownload, "DOWNLOAD_EVENTO_NFCe");
+            return RequisitarNaAPI(conteudo, Endpoints.NFCeDownload, "DOWNLOAD_EVENTO_NFCe");
         }
         public override void EnviarDownloadEventoESalvar(string caminho, string tpEvento, bool exibirNaTela)
         {

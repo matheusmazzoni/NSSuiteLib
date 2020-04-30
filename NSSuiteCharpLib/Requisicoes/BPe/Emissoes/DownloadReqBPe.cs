@@ -7,10 +7,11 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe
 {
     public class DownloadReqBPe : TemplateDownloadReq
     {
-        public string chBPe { get; set; }
+        [JsonProperty("chBPe")]
+        public string ChaveBPe { get; set; }
         public override string GetChave()
         {
-            return chBPe;
+            return ChaveBPe;
         }
         public override Projeto GetProjeto()
         {
@@ -23,7 +24,5 @@ namespace NSSuiteCSharpLib.Requisicoes.BPe
             string msgLog = "DONWLOAD_BPe";
             return RequisitarNaAPI(conteudo, url, msgLog);
         }
-
-
     }
 }

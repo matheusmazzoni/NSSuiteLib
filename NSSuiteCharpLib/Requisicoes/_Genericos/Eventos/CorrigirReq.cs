@@ -6,7 +6,7 @@ using NSSuiteCSharpLib.Respostas._Genéricas;
 
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Eventos
 {
-    public abstract class CorrigirReq : Evento
+    public abstract class CorrigirReq : EventoReq
     {
         public string tpAmb { get; set; }
         public string dhEvento { get; set; }

@@ -5,7 +5,7 @@ using NSSuiteCSharpLib.Respostas._Genéricas;
 
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Eventos
 {
-    public abstract class CancelarReq : Evento
+    public abstract class CancelarReq : EventoReq
     {
         public string tpAmb { get; set; }
         public string dhEvento { get; set; }

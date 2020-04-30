@@ -16,7 +16,7 @@ namespace NSSuiteCSharpLib
             TempoEspera = 500;
         }
 
-        public void EmitirDocumentoSincrono(IEnvio emissaoReq, string tpDown, string caminho,
+        public void EmitirDocumentoSincrono(IEmissao emissaoReq, string tpDown, string caminho,
             bool exibirNaTela = false, bool a3 = false)
         {
             try

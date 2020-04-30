@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Padroes
 {
-    public class Evento
+    public class EventoReq : Requisicao
     {
 
     }

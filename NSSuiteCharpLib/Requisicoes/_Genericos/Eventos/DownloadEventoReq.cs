@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace NSSuiteCSharpLib.Requisicoes._Genericos.Eventos
 {
-    public abstract class DownloadEventoReq : Evento
+    public abstract class DownloadEventoReq : EventoReq
     {
         public string tpAmb { get; set; }
         public string tpDown { get; set; }
